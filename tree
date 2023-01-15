@@ -1,0 +1,49 @@
+Pregnancies Glucose BloodPressure SkinThickness Insulin BMI DiabetesPedigreeFunction Age Outcome
+0 6 148 72 35 0 33.6 0.627 50 1
+1 1 85 66 29 0 26.6 0.351 31 0
+2 8 183 64 0 0 23.3 0.672 32 1
+3 1 89 66 23 94 28.1 0.167 21 0
+4 0 137 40 35 168 43.1 2.288 33 1
+Pregnancies Glucose BloodPressure SkinThickness Insulin BMI DiabetesPedigreeFunction Age Outcome
+0 6 148 72 35 0 33.6 0.627 50 1
+1 1 85 66 29 0 26.6 0.351 31 0
+2 8 183 64 0 0 23.3 0.672 32 1
+3 1 89 66 23 94 28.1 0.167 21 0
+4 0 137 40 35 168 43.1 2.288 33 1
+... ... ... ... ... ... ... ... ... ...
+95 6 144 72 27 228 33.9 0.255 40 0
+96 2 92 62 28 0 31.6 0.130 24 0
+97 1 71 48 18 76 20.4 0.323 22 0
+98 6 93 50 30 64 28.7 0.356 23 0
+99 1 122 90 51 220 49.7 0.325 31 1
+100 rows × 9 columns
+In [1]:
+import numpy as np
+import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+In [2]:
+data = pd.read_csv('diabetes.csv')
+data.head()
+Out[2]: In [5]:
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+data['Outcome'] = encoder.fit_transform(data['Outcome'])
+data.head(100)
+Out[5]: In [9]:
+X = data.drop(columns = ['Outcome'])
+Y = data['Outcome']
+X_traindata, X_testdata, y_traindata, y_testdata = train_test_split(X,Y, test_size =0.3
+In [13]:
+knn = KNeighborsClassifier(n_neighbors = 8)
+In [21]: knn.fit(X_traindata, y_traindata)
+KNeighborsClassifier(n_neighbors=8)
+Out[21]:
+Accuracy with k=8 7.056277056277056
+In [22]:
+y_pred = knn.predict(X_testdata)
+from sklearn.metrics import accuracy_score
+print("Accuracy with k=8", accuracy_score(y_testdata, y_pred) * 10)
+In [ ]: In [ ]:
+▾ KNeighborsClassifier
+KNeighborsClassifier(n_neighbors=8)
